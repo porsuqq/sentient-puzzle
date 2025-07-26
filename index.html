@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentient Puzzle Game</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Havai fişek efekti için canvas-confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="home" class="home-screen">
+            <h1>Welcome to the Sentient Puzzle Game</h1>
+            <div class="puzzle-selection">
+                <img src="img4.png" alt="Puzzle 1" class="puzzle-btn" data-puzzle="1">
+                <img src="img5.png" alt="Puzzle 2" class="puzzle-btn" data-puzzle="2">
+                <img src="img6.png" alt="Puzzle 3" class="puzzle-btn" data-puzzle="3">
+            </div>
+        </div>
+        <div id="game" class="game-screen hidden">
+            <div class="music-control">
+                <img id="music-toggle" src="on.png" alt="Music Toggle" class="music-btn">
+            </div>
+            <div class="game-content">
+                <div id="puzzle-board"></div>
+                <div class="game-controls">
+                    <div id="timer">00:00:00</div>
+                    <button id="restart-btn">Restart</button>
+<img id="puzzle-preview" src="" alt="Puzzle Preview" class="puzzle-preview">
+                </div>
+            </div>
+            <button id="back-btn">HomePage</button>
+            <div id="win-overlay" class="win-overlay hidden">
+                <div class="win-content">
+                    <h2>Congratulations! Puzzle Completed !</h2>
+                    <p id="win-time">Süre: 00:00:00</p>
+                    <button id="win-back-btn">HomePage</button>
+                    <button id="win-restart-btn">Restart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="background-music" src="back.mp3" loop></audio>
+    <audio id="click-sound" src="tık.mp3"></audio>
+    <audio id="win-sound" src="win.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Puzzle 1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Puzzle 1</h1>
+
+  <!-- Diğer puzzle'lara bağlantılar -->
+  <div class="puzzle-links">
+    <a href="puzzle2.html">Go to Puzzle 2</a>
+    <a href="puzzle3.html">Go to Puzzle 3</a>
+  </div>
+
+  <div id="puzzle"></div>
+
+  <script>
+    const puzzleImage = 'images/puzzle1.png';
+    const grid = document.getElementById('puzzle');
+    let tiles = [];
+    let selectedIndex = null;
+
+    function createPuzzle() {
+      for (let i = 0; i < 16; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        if (i < 15) {
+          tile.style.backgroundImage = `url(${puzzleImage})`;
+          const row = Math.floor(i / 4);
+          const col = i % 4;
+          tile.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+          tile.dataset.index = i;
+        } else {
+          tile.classList.add('empty');
+        }
+        tile.addEventListener('click', () => handleTileClick(i));
+        grid.appendChild(tile);
+        tiles.push(tile);
+      }
+      shufflePuzzle();
+    }
+
+    function handleTileClick(index) {
+      // Seçim göstergesi
+      tiles.forEach(t => t.classList.remove('selected'));
+
+      const emptyIndex = tiles.findIndex(tile => tile.classList.contains('empty'));
+      const validMoves = [index - 1, index + 1, index - 4, index + 4];
+
+      if (validMoves.includes(emptyIndex)) {
+        [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+        renderTiles();
+      } else {
+        // Eğer hareket geçersizse yine de göster
+        tiles[index].classList.add('selected');
+      }
+    }
+
+    function renderTiles() {
+      grid.innerHTML = '';
+      tiles.forEach(tile => grid.appendChild(tile));
+    }
+
+    function shufflePuzzle() {
+      for (let i = tiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+      }
+      renderTiles();
+    }
+
+    createPuzzle();
+  </script>
+</body>
+</html>
